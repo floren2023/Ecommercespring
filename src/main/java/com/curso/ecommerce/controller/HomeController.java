@@ -1,6 +1,7 @@
 package com.curso.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,9 @@ import com.curso.ecommerce.model.Orden;
 import com.curso.ecommerce.model.Producto;
 import com.curso.ecommerce.model.Usuario;
 import com.curso.ecommerce.service.IUsuarioService;
-import com.curso.ecommerce.service.ProductoService;
+import com.curso.ecommerce.service.IDetalleOrdenService;
+import com.curso.ecommerce.service.IOrdenService;
+import com.curso.ecommerce.service.IProductoService;
 
 @Controller
 @RequestMapping("/")
@@ -29,10 +32,16 @@ public class HomeController {
 	private final Logger log=LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private ProductoService productoService;
+	private IProductoService productoService;
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired	
+	private IOrdenService ordenService;
+	
+	@Autowired	
+	private IDetalleOrdenService detalleOrdenService;
 	
 	//lista de detalles de orden carrito compras
 	List<DetalleOrden> detalles=new ArrayList<DetalleOrden>();
@@ -116,7 +125,7 @@ public class HomeController {
 	
 	@GetMapping("/order")
 	public String order(Model model) {
-		
+		//usuario quemado
 		Usuario usuario=usuarioService.findById((long) 1).get();
 		
 		 model.addAttribute("cart",detalles);
@@ -124,4 +133,27 @@ public class HomeController {
 		 model.addAttribute("usuario",usuario);
 		return "usuario/resumenorden";
 	}
+	//guardar la orden
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		Date fechaCreacion=new Date();
+		orden.setInitDate(fechaCreacion);
+		orden.setNumber(ordenService.generarNumeroOrden());
+		//usuario quemado
+		Usuario usuario=usuarioService.findById((long) 1).get();
+		orden.setUsuario(usuario);
+		ordenService.save(orden);
+		//guardar detalles
+		for (DetalleOrden dt:detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+			
+		}
+		//limpiar valores
+		orden=new Orden();
+		detalles.clear();
+		
+		return "redirect:/";
+	}
+	
 }

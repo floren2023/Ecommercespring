@@ -17,8 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.curso.ecommerce.model.Producto;
 import com.curso.ecommerce.model.Usuario;
-import com.curso.ecommerce.repository.ProductoRepository;
-import com.curso.ecommerce.service.ProductoService;
+import com.curso.ecommerce.repository.IProductoRepository;
+import com.curso.ecommerce.service.IProductoService;
 import com.curso.ecommerce.service.UploadFileService;
 
 
@@ -29,7 +29,7 @@ import com.curso.ecommerce.service.UploadFileService;
 @RequestMapping("/productos")
 public class ProductoController {
 	@Autowired
-	private ProductoService productoService; 
+	private IProductoService productoService; 
 	@Autowired 
 	private UploadFileService upload;
 

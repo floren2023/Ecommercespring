@@ -12,7 +12,10 @@ import jakarta.persistence.Table;
 @Table(name = "tbdetallesorden")
 public class DetalleOrden {
 	@Id	
-	   private String id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "id") 
+	    private  Integer id ;
+	
 	@Column(name = "name")
 	   private String name;
 	@Column(name = "cant")
@@ -21,8 +24,7 @@ public class DetalleOrden {
 	   private double price;
 	@Column(name = "total")
 	   private double total;
-	
-	@OneToOne
+ @OneToOne
 	private Orden orden;
 	@ManyToOne
 	private Producto producto;
@@ -33,7 +35,7 @@ public class DetalleOrden {
 
 	
 
-	public DetalleOrden(String id, String name, double cant, double price, double total, Orden orden,
+	public DetalleOrden(Integer id, String name, double cant, double price, double total, Orden orden,
 			Producto producto) {
 		super();
 		this.id = id;
@@ -47,11 +49,11 @@ public class DetalleOrden {
 
 
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
