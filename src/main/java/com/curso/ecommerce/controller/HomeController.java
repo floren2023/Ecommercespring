@@ -146,7 +146,7 @@ public class HomeController {
 		ordenService.save(orden);
 		//guardar detalles
 		for (DetalleOrden dt:detalles) {
-			dt.setOrden(orden);
+			dt.setOrden_id(orden.getId());
 			detalleOrdenService.save(dt);
 			
 		}

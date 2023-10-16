@@ -24,8 +24,8 @@ public class DetalleOrden {
 	   private double price;
 	@Column(name = "total")
 	   private double total;
- @OneToOne
-	private Orden orden;
+	@Column(name = "orden_id")
+	   private Long orden_id;
 	@ManyToOne
 	private Producto producto;
 	
@@ -35,7 +35,7 @@ public class DetalleOrden {
 
 	
 
-	public DetalleOrden(Integer id, String name, double cant, double price, double total, Orden orden,
+	public DetalleOrden(Integer id, String name, double cant, double price, double total, long orden_id,
 			Producto producto) {
 		super();
 		this.id = id;
@@ -43,7 +43,7 @@ public class DetalleOrden {
 		this.cant = cant;
 		this.price = price;
 		this.total = total;
-		this.orden = orden;
+		this.orden_id = orden_id;
 		this.producto = producto;
 	}
 
@@ -89,14 +89,14 @@ public class DetalleOrden {
 		this.total = total;
 	}
 
-	public Orden getOrden() {
-		return orden;
+	public Long getOrden_id() {
+		return orden_id;
 	}
 
 
 
-	public void setOrden(Orden orden) {
-		this.orden = orden;
+	public void setOrden_id(long orden_id) {
+		this.orden_id = orden_id;
 	}
 
 

@@ -1,11 +1,15 @@
 package com.curso.ecommerce.model;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -26,11 +30,13 @@ public class Orden {
 	 
 	 @Column(name = "total")
 	   private double total;
+	 
 	 @ManyToOne
 	 private Usuario usuario;
 	 
-	 @OneToOne(mappedBy="orden")
-	 private DetalleOrden detalle;
+	 @OneToMany(cascade=CascadeType.ALL)
+	 @JoinColumn(name="orden_no",referencedColumnName="id")
+	 List<DetalleOrden> detalle=new ArrayList<DetalleOrden>();
 	 
 	 
 public Usuario getUsuario() {
@@ -49,23 +55,17 @@ public Orden() {
 
 
 
-public DetalleOrden getDetalle() {
+
+
+
+
+
+
+public List<DetalleOrden> getDetalle() {
 	return detalle;
 }
 
-public void setDetalle(DetalleOrden detalle) {
-	this.detalle = detalle;
-}
-
-public Orden(long id, String number, Date initDate, Date receiveDate, double total, Usuario usuario,
-		DetalleOrden detalle) {
-	super();
-	this.id = id;
-	this.number = number;
-	this.initDate = initDate;
-	this.receiveDate = receiveDate;
-	this.total = total;
-	this.usuario = usuario;
+public void setDetalle(List<DetalleOrden> detalle) {
 	this.detalle = detalle;
 }
 

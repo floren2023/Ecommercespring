@@ -12,6 +12,12 @@ import com.curso.ecommerce.repository.IUsuarioRepository;
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
 
+	@Override
+	public Usuario save(Usuario usuario) {
+		
+		return usuarioRepository.save(usuario);
+	}
+
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 
