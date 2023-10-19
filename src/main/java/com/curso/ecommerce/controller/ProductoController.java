@@ -19,7 +19,10 @@ import com.curso.ecommerce.model.Producto;
 import com.curso.ecommerce.model.Usuario;
 import com.curso.ecommerce.repository.IProductoRepository;
 import com.curso.ecommerce.service.IProductoService;
+import com.curso.ecommerce.service.IUsuarioService;
 import com.curso.ecommerce.service.UploadFileService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -32,6 +35,8 @@ public class ProductoController {
 	private IProductoService productoService; 
 	@Autowired 
 	private UploadFileService upload;
+	@Autowired 
+	private IUsuarioService usuarioService;
 
 	private final Logger LOGGER=LoggerFactory.getLogger(ProductoController.class);
 	
@@ -57,8 +62,9 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {	
-		Usuario usuario=new Usuario(1,"","","","","","","",null,null);
+	public String save(Producto producto,@RequestParam("img") MultipartFile file, HttpSession session) throws IOException {	
+		//Usuario usuario=new Usuario(1,"","","","","","","",null,null);
+		Usuario usuario=usuarioService.findById((Long) session.getAttribute("userid")).get() ;
 		producto.setUsuario(usuario);
 		
 		//imagen

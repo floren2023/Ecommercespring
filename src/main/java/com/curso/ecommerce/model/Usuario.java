@@ -12,7 +12,16 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tbusuarios")
 public class Usuario {
-	 @Id
+	 @Override
+	public String toString() {
+		return "Usuario [id=" + id + ", name=" + name + ", userName=" + userName + ", emailId=" + emailId + ", adress="
+				+ adress + ", phone=" + phone + ", type=" + type + ", password=" + password + ", productos=" + productos
+				+ ", ordenes=" + ordenes + "]";
+	}
+
+
+
+	@Id
 	   @GeneratedValue(strategy = GenerationType.IDENTITY)
 	   private long id;
 
