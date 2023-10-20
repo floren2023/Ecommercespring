@@ -58,8 +58,13 @@ public class UsuarioController {
 		}else {
 			logger.info("Usuario no existe");
 		}
-		
-		
+				
 		return "redirect:/";
+	}
+	
+	@GetMapping("/compras")
+	public String obtenerCompras(Model model,HttpSession session) {
+		model.addAttribute("sesion",session.getAttribute("userid"));
+		return "usuario/compras";
 	}
 }
