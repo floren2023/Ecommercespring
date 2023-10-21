@@ -52,10 +52,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td >4555454</td>
-                  <td >Fecha de Compra</td>
-                  <td >Total</td>
+                <tr th:each="orden:${ordenes}">
+                  <td th:text="${orden.number}"><}/td>
+                  <td th:text="${orden.initDate}"></td>
+                 <td th:text="${orden.total}"></td>
+                 
                   <td><a href="detallecompra.html" class="btn btn-success">Ver Detalle</a></td>
                 </tr>
               </tbody>
