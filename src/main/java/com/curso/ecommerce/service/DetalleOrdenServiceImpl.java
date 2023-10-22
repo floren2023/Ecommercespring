@@ -17,7 +17,7 @@ public class DetalleOrdenServiceImpl implements IDetalleOrdenService{
 		
 		return detalleOrdenRepository.save(detalleOrden);
 	}
-
+	
 }
 
 

@@ -78,13 +78,13 @@ public class UsuarioController {
 		return "usuario/compras";
 	}
 	
-	@GetMapping("/detalle/{id}")
-	public String detalleCompra(@PathVariable Long id,HttpSession session,Model model) {
+	@GetMapping("/detalle/{orden_id}")
+	public String detalleCompra(@PathVariable Long orden_id,HttpSession session,Model model) {
 		//session
 		model.addAttribute("sesion",session.getAttribute("userid"));
-		logger.info("ordenid={}",id);
-		Optional<Orden> orden=ordenService.findById(id);
-		model.addAttribute("detalles",orden.get().getDetalle());
+		logger.info("ordenid={}",orden_id);
+		Orden orden=ordenService.findById(orden_id).get();
+		model.addAttribute("detalles",orden.getDetalle());
 		return "usuario/detallecompra";
 	}
 	@GetMapping("/cerrar")

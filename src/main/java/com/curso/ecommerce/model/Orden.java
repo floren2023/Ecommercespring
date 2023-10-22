@@ -35,7 +35,7 @@ public class Orden {
 	 private Usuario usuario;
 	 
 	 @OneToMany(cascade=CascadeType.ALL)
-	 @JoinColumn(name="orden_no",referencedColumnName="id")
+	 @JoinColumn(name="orden_id",referencedColumnName="id")
 	 List<DetalleOrden> detalle=new ArrayList<DetalleOrden>();
 	 
 	 
@@ -50,13 +50,6 @@ public Usuario getUsuario() {
 public Orden() {
 	// TODO Auto-generated constructor stub
 }
-
-
-
-
-
-
-
 
 
 
